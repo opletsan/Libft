@@ -6,32 +6,19 @@
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 16:04:38 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/09 14:54:40 by opletsan         ###   ########.fr       */
+/*   Updated: 2017/11/08 22:16:16 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 int		ft_numlen(int n)
 {
-	int	len;
+	int	l;
 
-	len = 1;
-	while (n > 9 || n < -9)
+	l = 1;
+	while (n / 10)
 	{
-		len++;
 		n /= 10;
+		l++;
 	}
-	if (n < 0)
-		len++;
-	return (len);
-}
-
-int		main(void)
-{
-	int	n;
-
-	n = +0;
-	printf("%d\n", ft_numlen(n));
-	return (0);
+	return (l);
 }

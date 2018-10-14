@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_sqrtf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 21:52:53 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/03 12:50:16 by opletsan         ###   ########.fr       */
+/*   Created: 2018/09/30 17:34:16 by opletsan          #+#    #+#             */
+/*   Updated: 2018/09/30 17:34:19 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+float	ft_sqrtf(float x)
+{
+	int		i;
+	float	xhalf;
 
-int		ft_isalpha(int c)
-{
-	if (((unsigned char)c >= 65 && (unsigned char)c <= 90) ||
-			((unsigned char)c >= 97 && (unsigned char)c <= 122))
-		return (1);
-	return (0);
-}
-int		main(void)
-{
-	printf("%d\n", ft_isalpha(' '));
-	printf("%d\n", isalpha(' '));
-	return (0);
+	xhalf = 0.5f * x;
+	i = *(int*)&x;
+	i = 0x5f3759df - (i >> 1);
+	x = *(float*)&i;
+	x = x * (1.5f - xhalf * x * x);
+	x = x * (1.5f - (xhalf * x * x));
+	return (1.0 / x);
 }

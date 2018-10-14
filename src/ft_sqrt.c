@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/04 22:21:01 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/04 22:36:43 by opletsan         ###   ########.fr       */
+/*   Created: 2017/11/06 20:49:44 by opletsan          #+#    #+#             */
+/*   Updated: 2017/11/06 21:12:46 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strmap(char const *s, char (*f)(char))
+int	ft_sqrt(int x)
 {
-	char	*str;
-	size_t	i;
+	int i;
 
-	i = 0;
-	if (!s)
+	i = 1;
+	if (x <= 0)
 		return (0);
-	while (s[i] != '\0')
-		i++;
-	str = (char*)malloc(sizeof(*str) * i + 1);
-	if (!str)
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
+	while ((i * i) != x)
 	{
-		str[i] = f(s[i]);
+		if ((i * i) > x)
+			return (0);
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	return (i);
 }

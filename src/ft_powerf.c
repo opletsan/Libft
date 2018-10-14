@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   ft_powerf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 17:52:42 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/08 17:53:06 by opletsan         ###   ########.fr       */
+/*   Created: 2018/09/30 17:37:32 by opletsan          #+#    #+#             */
+/*   Updated: 2018/09/30 17:37:36 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_power(int nb, int power)
+float	ft_powerf(float nb, int power)
 {
-	int a;
+	float	res;
 
-	a = nb;
-	if (power > 1)
-	{
-		while (power > 1)
-		{
-			nb = nb * a;
-			power--;
-		}
-		return (nb);
-	}
-	else if (power == 1)
-	{
-		return (nb);
-	}
-	else if (power == 0)
-	{
-		return (1);
-	}
-	else
-	{
+	res = 1l;
+	if (power < 0)
 		return (0);
+	while (power > 0)
+	{
+		if (power & 1)
+			res *= nb;
+		nb *= nb;
+		power >>= 1;
 	}
-	return (0);
+	return (res);
 }

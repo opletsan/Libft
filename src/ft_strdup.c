@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 20:16:42 by opletsan          #+#    #+#             */
-/*   Updated: 2018/02/21 20:17:41 by opletsan         ###   ########.fr       */
+/*   Created: 2017/10/25 16:58:59 by opletsan          #+#    #+#             */
+/*   Updated: 2017/11/04 17:29:14 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free(char **array)
+char	*ft_strdup(const char *src)
 {
-	size_t i;
+	size_t	i;
+	size_t	len;
+	char	*isrc;
 
+	len = 0;
 	i = 0;
-	while (array[i])
+	while (src[i] != '\0')
 	{
-		free(array[i]);
-		array[i++] = NULL;
+		i++;
+		len++;
 	}
-	free(array);
-	array = NULL;
+	if (!(isrc = (char*)malloc(sizeof(*isrc) * len + 1)))
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		isrc[i] = src[i];
+		i++;
+	}
+	isrc[i] = '\0';
+	return (isrc);
 }

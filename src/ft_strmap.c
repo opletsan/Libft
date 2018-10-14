@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numlen.c                                        :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 16:04:38 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/08 22:16:16 by opletsan         ###   ########.fr       */
+/*   Created: 2017/11/04 22:21:01 by opletsan          #+#    #+#             */
+/*   Updated: 2017/11/04 22:36:43 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_numlen(int n)
-{
-	int	len;
+#include "libft.h"
 
-	len = 1;
-	while (n > 9 || n < -9)
+char	*ft_strmap(char const *s, char (*f)(char))
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	if (!(str = (char*)malloc(sizeof(*str) * i + 1)))
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
 	{
-		len++;
-		n /= 10;
+		str[i] = f(s[i]);
+		i++;
 	}
-	if (n < 0)
-		len++;
-	return (len);
+	str[i] = '\0';
+	return (str);
 }

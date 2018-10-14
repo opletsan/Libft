@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 20:27:42 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/02 20:48:58 by opletsan         ###   ########.fr       */
+/*   Created: 2017/11/08 17:52:42 by opletsan          #+#    #+#             */
+/*   Updated: 2017/11/08 17:53:06 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
-
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_power(int nb, int power)
 {
-	while (n > 0)
+	int a;
+
+	a = nb;
+	if (power > 1)
 	{
-		if (*(unsigned char*)s1 == *(unsigned char*)s2)
+		while (power > 1)
 		{
-			s1++;
-			s2++;
+			nb *= a;
+			power--;
 		}
-		else
-			return (*(unsigned char*)s1 - *(unsigned char*)s2);
-		n--;
+		return (nb);
 	}
+	else if (power == 1)
+		return (nb);
+	else if (power == 0)
+		return (1);
 	return (0);
 }
-
-int		main(void)
-{
-	char a[] = "434";
-	char b[] = "432";
-
-	ft_memcmp(a, b, 0);
-	printf("%d\n", ft_memcmp(a, b, 0));
-	memcmp(a, b, 0);
-	printf("%d\n", memcmp(a, b, 0));
-	return (0);
-}
-

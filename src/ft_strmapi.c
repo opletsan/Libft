@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opletsan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/25 16:58:59 by opletsan          #+#    #+#             */
-/*   Updated: 2017/11/04 17:29:14 by opletsan         ###   ########.fr       */
+/*   Created: 2017/11/04 22:37:38 by opletsan          #+#    #+#             */
+/*   Updated: 2017/11/04 22:39:18 by opletsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
+	char	*str;
 	size_t	i;
-	size_t	len;
-	char	*isrc;
 
-	len = 0;
 	i = 0;
-	while (src[i] != '\0')
-	{
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
 		i++;
-		len++;
-	}
-	isrc = (char*)malloc(sizeof(*isrc) * len + 1);
-	if (!isrc)
+	if (!(str = (char*)malloc(sizeof(*str) * i + 1)))
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (s[i] != '\0')
 	{
-		isrc[i] = src[i];
+		str[i] = f(i, s[i]);
 		i++;
 	}
-	isrc[i] = '\0';
-	return (isrc);
+	str[i] = '\0';
+	return (str);
 }
