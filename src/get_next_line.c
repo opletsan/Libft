@@ -45,7 +45,8 @@ static inline int	read_line(t_gnl *f, const int fd, char *buf)
 	char	*tmp;
 
 	ret = 0;
-	while (!(ft_strchr(f->buf, '\n')) && (ret = read(fd, buf, BUF_SIZE)) > 0)
+	while (f->buf && !(ft_strchr(f->buf, '\n')) &&
+			(ret = read(fd, buf, BUF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		tmp = f->buf;
@@ -61,24 +62,23 @@ static inline int	read_line(t_gnl *f, const int fd, char *buf)
 	return (ret);
 }
 
-static inline int	contin(char **line, t_gnl *f)
+static inline int	contin(char **line, t_gnl *f, int len)
 {
-	char		*tmp;
-	char		*nbuf;
-	int			ret;
-	static int	len;
+	char	*tmp;
+	char	*nbuf;
 
-	ret = 0;
 	if ((tmp = ft_strchr(f->buf, '\n')))
 	{
-		ret = 1;
-		len = ((tmp - f->buf) > 0) ? (tmp - f->buf) : 1;
+		if ((tmp - f->buf) > 0)
+			len = tmp - f->buf;
 		if (!(*line = ft_strsub(f->buf, 0, len)) ||
 				!(nbuf = ft_strdup(tmp + 1)))
 		{
 			ft_strdel(&f->buf);
 			return (-1);
 		}
+		if (**line == '\n')
+			**line = '\0';
 		ft_strdel(&f->buf);
 		f->buf = nbuf;
 	}
@@ -87,7 +87,7 @@ static inline int	contin(char **line, t_gnl *f)
 		*line = ft_strdup(f->buf);
 		ft_strdel(&f->buf);
 	}
-	return ((ret == 0) ? 0 : 1);
+	return (1);
 }
 
 int					get_next_line(const int fd, char **line)
@@ -106,10 +106,10 @@ int					get_next_line(const int fd, char **line)
 		ft_strdel(&f->buf);
 		return (-1);
 	}
-	if (!*f->buf)
+	if (!f->buf || !*f->buf)
 	{
 		ft_strdel(&f->buf);
 		return (0);
 	}
-	return (contin(line, f));
+	return (contin(line, f, 1));
 }
